@@ -13,6 +13,8 @@ This is now automated and is really easy.
 1. Once done, it will restart the user interface (lipstick). This takes several seconds.
 1. If you don't get the expected results, reboot the phone.
 
+This breaks after most updates. So it's worth re-running the script after the update.
+
 ## Original instructions
 
 "deprecated" posted the following [here](https://forum.sailfishos.org/t/ui-themer-missing-from-openrepos/2457/62):
