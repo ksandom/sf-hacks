@@ -1,0 +1,16 @@
+#!/bin/bash
+
+file="/etc/dconf/db/vendor.d/locks/silica-configs.txt"
+pathPrefix="/desktop/sailfish/silica/theme_"
+
+if [ ! -e "$file" ]; then
+  echo "Could not find \"$file\"." >&2
+  exit 1
+fi
+
+sed -i "s:^$pathPrefix\(pixel_ratio\|icon_subdir\):#$pathPrefix\1:g" "$file"
+
+cat "$file"
+
+echo "Now reboot to enable these changes."
+

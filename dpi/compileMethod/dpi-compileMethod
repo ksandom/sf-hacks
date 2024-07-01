@@ -1,0 +1,31 @@
+#!/bin/bash -ex
+
+if [ "$(id -u)" != '0' ]; then
+  devel-su "$0" "$1"
+  exit 1
+fi
+
+echo "Installing the required packages."
+pkcon install --allow-reinstall -y sailfish-content-graphics-default-z1.0-base sailfish-content-graphics-default-z1.25-base sailfish-content-graphics-default-z1.5-base sailfish-content-graphics-default-z1.75-base sailfish-content-graphics-default-z2.0-base sailfish-content-graphics-closed-z1.0 sailfish-content-graphics-closed-z1.25 sailfish-content-graphics-closed-z1.5 sailfish-content-graphics-closed-z1.75 sailfish-content-graphics-closed-z2.0
+
+echo "Updating the configuration."
+sed -i 's/1\.75/1.25/g' /etc/dconf/db/vendor.d/silica-configs.txt
+
+echo "Compiling stuff."
+dconf compile /etc/dconf/db/vendor.new /etc/dconf/db/vendor.d
+
+echo "Applying the new config."
+cd /etc/dconf/db
+mv vendor{,.bak}
+mv vendor.new vendor
+
+echo "Restarting lipstick. It will take several seconds. If it doesn't work, reboot."
+set +x
+for i in {10..1}; do
+  echo -n "  $i"
+  sleep 1
+done
+echo 
+set -x
+
+systemctl --user restart lipstick

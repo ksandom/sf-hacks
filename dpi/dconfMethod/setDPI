@@ -1,0 +1,13 @@
+#!/bin/bash
+# Set the DPI as desired.
+
+dconf write /desktop/sailfish/silica/theme_pixel_ratio "${1:-1.15}"
+echo -n "Restarting the UI. This will take a few seconds..."
+sleep 2
+
+if systemctl --user restart lipstick; then
+  echo " Yay!"
+else
+  echo " Oops. Debugging time." >&2
+  exit 1
+fi

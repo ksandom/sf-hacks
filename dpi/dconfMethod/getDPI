@@ -1,0 +1,10 @@
+#!/bin/bash
+# Set the DPI as desired.
+
+echo "The basics:
+A smaller number (eg 1.0) creates smaller elements with more space.
+A larger number (eg 1.5) creates larger elements with less space.
+
+Current:"
+
+dconf read /desktop/sailfish/silica/theme_pixel_ratio
