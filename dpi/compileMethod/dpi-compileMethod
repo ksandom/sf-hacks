@@ -11,6 +11,22 @@
 #
 #   Set the scaling to 1.25, but the icons to size 1.
 #     dpi-compileMethod 1.25 1.0
+#
+# Ratios can be custom. But Icon sizes need to match one of the installed sets.
+
+
+function showHelp
+{
+  grep -B1000 "function showHelp" "$0" | grep '^#' | grep -v '^#!' | cut -b3-
+  echo
+  echo "Icon sizes:"
+  grep "^  *'.*') #" "$0" | sed "s/\(  '\|) #\)/  /g"
+}
+
+if [ "$1" == '--help' ]; then
+  showHelp
+  exit 0
+fi
 
 if [ "$(id -u)" != '0' ]; then
   devel-su "$0" "$@"
@@ -28,23 +44,25 @@ fi
 
 # Check that the iconSize is something expected.
 case $iconSize in
-  '1.0')
+  '1.0') #  Tiny.
     true
   ;;
-  '1.25')
+  '1.25') # Smaller.
     true
   ;;
-  '1.5')
+  '1.5') #  Small.
     true
   ;;
-  '1.75')
+  '1.75') # Default.
     true
   ;;
-  '2.0')
+  '2.0') #  Large.
     true
   ;;
   *)
     echo "iconSize should be one of" {1.0,1.25,1.5,1.75,2.0} >&2
+    echo
+    showHelp
     exit 1
   ;;
 esac
@@ -52,6 +70,9 @@ esac
 echo "Will set:
   ratio:      $ratio
   icon size:  $iconSize"
+
+
+
 
 echo "Installing the required packages."
 pkcon install --allow-reinstall -y sailfish-content-graphics-{default,closed}-{z1.0,z1.25,z1.5,z1.75,z2.0}

@@ -21,6 +21,10 @@ This is now automated and is really easy.
     ```bash
     ./dpi-compileMethod 1.25 1.0
     ```
+    eg Show internal help:
+    ```bash
+    ./dpi-compileMethod --help
+    ```
 
 If you are not running it as root, it will ask for your password to escalate privileges to root.
 
