@@ -9,7 +9,7 @@ size="${1:-1.75}"
 echo "Will set size to $size."
 
 echo "Installing the required packages."
-pkcon install --allow-reinstall -y sailfish-content-graphics-default-z1.0-base sailfish-content-graphics-default-z1.25-base sailfish-content-graphics-default-z1.5-base sailfish-content-graphics-default-z1.75-base sailfish-content-graphics-default-z2.0-base sailfish-content-graphics-closed-z1.0 sailfish-content-graphics-closed-z1.25 sailfish-content-graphics-closed-z1.5 sailfish-content-graphics-closed-z1.75 sailfish-content-graphics-closed-z2.0
+pkcon install --allow-reinstall -y sailfish-content-graphics-{default,closed}-{z1.0,z1.25,z1.5,z1.75,z2.0}
 
 echo "Updating the configuration."
 # [desktop/sailfish/silica]
