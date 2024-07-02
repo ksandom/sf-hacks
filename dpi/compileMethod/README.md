@@ -7,15 +7,19 @@ This is now automated and is really easy.
 1. Make sure that everything is saved.
 1. Run
     ```bash
-    ./dpi-compileMethod [pixelRatio]
+    ./dpi-compileMethod [ratio[ iconSize]]
     ```
     eg Reset to the default:
     ```bash
     ./dpi-compileMethod
     ```
-    eg Use 1.25:
+    eg Use 1.25 for both the ratio, and the icon size:
     ```bash
     ./dpi-compileMethod 1.25
+    ```
+    eg Use 1.25 for the raio, and 1.0 for the icon size:
+    ```bash
+    ./dpi-compileMethod 1.25 1.0
     ```
 
 If you are not running it as root, it will ask for your password to escalate privileges to root.
@@ -25,7 +29,9 @@ If you don't get the expected results, reboot the phone.
 
 This breaks after most updates. So it's worth re-running the script after the update.
 
-## Ratios
+## Ratios and Icon sizes
+
+While ratios can be something other than what is below, icon sizes are limited to the following sizes:
 
 | Ratio | Description          |
 | ----- | -------------------- |

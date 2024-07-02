@@ -1,12 +1,57 @@
 #!/bin/bash -e
+# Resize applications. This is particularly useful if you find the smallest text too big.
+# Syntax: dpi-compileMethod [ratio[ iconSize]]
+#
+# Examples:
+#   Reset back to default scaling.
+#     dpi-compileMethod
+#
+#   Set everything to 1.25.
+#     dpi-compileMethod 1.25
+#
+#   Set the scaling to 1.25, but the icons to size 1.
+#     dpi-compileMethod 1.25 1.0
 
 if [ "$(id -u)" != '0' ]; then
-  devel-su "$0" "$1"
-  exit 1
+  devel-su "$0" "$@"
+  exit 0
 fi
 
-size="${1:-1.75}"
-echo "Will set size to $size."
+ratio="${1:-1.75}"
+iconSize="$2"
+
+# Gracefully fallback to the ratio size.
+if [ "$iconSize" == '' ]; then
+  iconSize="$ratio"
+  echo "iconSize was not specified, so setting it to the same as the ratio($ratio)."
+fi
+
+# Check that the iconSize is something expected.
+case $iconSize in
+  '1.0')
+    true
+  ;;
+  '1.25')
+    true
+  ;;
+  '1.5')
+    true
+  ;;
+  '1.75')
+    true
+  ;;
+  '2.0')
+    true
+  ;;
+  *)
+    echo "iconSize should be one of" {1.0,1.25,1.5,1.75,2.0} >&2
+    exit 1
+  ;;
+esac
+
+echo "Will set:
+  ratio:      $ratio
+  icon size:  $iconSize"
 
 echo "Installing the required packages."
 pkcon install --allow-reinstall -y sailfish-content-graphics-{default,closed}-{z1.0,z1.25,z1.5,z1.75,z2.0}
@@ -15,7 +60,7 @@ echo "Updating the configuration."
 # [desktop/sailfish/silica]
 # theme_pixel_ratio=1.75
 # theme_icon_subdir='z1.75'
-sed -i "s/\(theme_pixel_ratio=\).*$/\1$size/g;s/\(theme_icon_subdir='z\).*$/\1$size'/g" /etc/dconf/db/vendor.d/silica-configs.txt
+sed -i "s/\(theme_pixel_ratio=\).*$/\1$ratio/g;s/\(theme_icon_subdir='z\).*$/\1$iconSize'/g" /etc/dconf/db/vendor.d/silica-configs.txt
 
 echo "Compiling stuff."
 dconf compile /etc/dconf/db/vendor.new /etc/dconf/db/vendor.d
