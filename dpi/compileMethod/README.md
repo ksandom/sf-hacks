@@ -37,13 +37,13 @@ This breaks after most updates. So it's worth re-running the script after the up
 
 While ratios can be something other than what is below, icon sizes are limited to the following sizes:
 
-| Ratio | Description          |
-| ----- | -------------------- |
-| 1     | Tiny.                |
-| 1.25  | My favourite.        |
-| 1.5   | Smaller than normal. |
-| 1.75  | **Default.**         |
-| 2     | Larger than normal.  |
+| Ratio | Description         |
+| ----- | ------------------- |
+| 1     | Tiny.               |
+| 1.25  | Smaller.            |
+| 1.5   | Small.              |
+| 1.75  | **Default.**        |
+| 2     | Larger than normal. |
 
 ## Original instructions
 
