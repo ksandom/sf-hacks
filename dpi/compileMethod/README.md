@@ -9,7 +9,7 @@ This is now automated and is really easy.
     ```bash
     ./dpi-compileMethod [pixelRatio]
     ```
-    eg Use the default:
+    eg Reset to the default:
     ```bash
     ./dpi-compileMethod
     ```
