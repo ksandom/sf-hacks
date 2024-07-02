@@ -7,13 +7,33 @@ This is now automated and is really easy.
 1. Make sure that everything is saved.
 1. Run
     ```bash
+    ./dpi-compileMethod [pixelRatio]
+    ```
+    eg Use the default:
+    ```bash
     ./dpi-compileMethod
     ```
-1. If you are not running it as root, it will ask for your password to escalate privileges to root.
-1. Once done, it will restart the user interface (lipstick). This takes several seconds.
-1. If you don't get the expected results, reboot the phone.
+    eg Use 1.25:
+    ```bash
+    ./dpi-compileMethod 1.25
+    ```
+
+If you are not running it as root, it will ask for your password to escalate privileges to root.
+
+Once done, it will restart the user interface (lipstick). This takes several seconds.
+If you don't get the expected results, reboot the phone.
 
 This breaks after most updates. So it's worth re-running the script after the update.
+
+## Ratios
+
+| Ratio | Description          |
+| ----- | -------------------- |
+| 1     | Tiny.                |
+| 1.25  | My favourite.        |
+| 1.5   | Smaller than normal. |
+| 1.75  | **Default.**         |
+| 2     | Larger than normal.  |
 
 ## Original instructions
 

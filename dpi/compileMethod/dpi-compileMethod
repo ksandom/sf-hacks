@@ -5,11 +5,17 @@ if [ "$(id -u)" != '0' ]; then
   exit 1
 fi
 
+size="${1:-1.75}"
+echo "Will set size to $size."
+
 echo "Installing the required packages."
 pkcon install --allow-reinstall -y sailfish-content-graphics-default-z1.0-base sailfish-content-graphics-default-z1.25-base sailfish-content-graphics-default-z1.5-base sailfish-content-graphics-default-z1.75-base sailfish-content-graphics-default-z2.0-base sailfish-content-graphics-closed-z1.0 sailfish-content-graphics-closed-z1.25 sailfish-content-graphics-closed-z1.5 sailfish-content-graphics-closed-z1.75 sailfish-content-graphics-closed-z2.0
 
 echo "Updating the configuration."
-sed -i 's/1\.75/1.25/g' /etc/dconf/db/vendor.d/silica-configs.txt
+# [desktop/sailfish/silica]
+# theme_pixel_ratio=1.75
+# theme_icon_subdir='z1.75'
+sed -i "s/\(theme_pixel_ratio=\).*$/\1$size/g;s/\(theme_icon_subdir='z\).*$/\1$size'/g" /etc/dconf/db/vendor.d/silica-configs.txt
 
 echo "Compiling stuff."
 dconf compile /etc/dconf/db/vendor.new /etc/dconf/db/vendor.d
