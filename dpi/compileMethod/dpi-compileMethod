@@ -1,4 +1,4 @@
-#!/bin/bash -ex
+#!/bin/bash -e
 
 if [ "$(id -u)" != '0' ]; then
   devel-su "$0" "$1"
@@ -20,12 +20,10 @@ mv vendor{,.bak}
 mv vendor.new vendor
 
 echo "Restarting lipstick. It will take several seconds. If it doesn't work, reboot."
-set +x
 for i in {10..1}; do
   echo -n "  $i"
   sleep 1
 done
-echo 
-set -x
+echo
 
 systemctl --user restart lipstick
