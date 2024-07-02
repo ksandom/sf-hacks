@@ -1,5 +1,7 @@
 # DPI - compileMethod
 
+This is the compile method for changing the scaling of the user interface on Sailfish beyond the options that are provided in the settings.
+
 ## Automation
 
 This is now automated and is really easy.
